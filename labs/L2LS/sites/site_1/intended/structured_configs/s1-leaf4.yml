@@ -20,7 +20,7 @@ local_users:
 - name: arista
   privilege: 15
   role: network-admin
-  sha512_password: $6$arista$RArU/OEQzi81GpjRc8tQz6nDYbOoQGCq02vnj4AeNZrW6wSGSN6dyDw1/DzCDi5HvsTWHXFmASMPSy7iJED.T/
+  sha512_password: $6$arista$KeKaDo4a3QAS/m.SRMQ.NJe94UH5GOYEfIZ8KOD9/lzGVQftQYQgyhxZ/QjrUgznsAaKWTJUrItV0kozE5zn0/
   ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCE4+hIvMxClnYxiROG/hbw3DXGiDNeEt7z26ZCluA57PXcE5Xif78lCERAq66GRFIfDPb/piVEVQZvB6K9O2HbiT6mCQ1o5Hd4TQSy5zyKPLl3bod5s7ZwG+dLAfGdeuCnTNXeZCS+TA332PlzBPDNbeGIWxf9J9lzP/tw9hBITQnvNTFtrfGLBSoO9AOcITbPbZ4zgwqNd0IRaLyI+132A6jmR0ojKdx9dEQnpb4+7wSkNJ6l26iCN9yj1NzXE/1MZ1910wAaXwBwtoH60C8HJdtAQpPHlWtJe4p04jQG5IKKThCyf5h8bcLrCd3N9unZ/Su37YHYUZiQbSOW7YbR
     arista@vaughan-avd-workshop-27-33c6a38d-eos.c.atds-280712.internal
 vrfs:
@@ -69,6 +69,14 @@ port_channel_interfaces:
   mode: trunk
   vlans: '20'
   mlag: 2
+- name: Port-Channel4
+  description: s1-host2
+  type: switched
+  shutdown: false
+  mode: access
+  vlans: '20'
+  spanning_tree_portfast: edge
+  mlag: 4
 ethernet_interfaces:
 - name: Ethernet1
   peer: s1-leaf3
@@ -109,6 +117,17 @@ ethernet_interfaces:
   type: port-channel-member
   channel_group:
     id: 2
+    mode: active
+- name: Ethernet4
+  peer: s1-host2
+  peer_interface: eth2
+  peer_type: server
+  port_profile: PP-VLAN20
+  description: s1-host2_eth2
+  shutdown: false
+  type: port-channel-member
+  channel_group:
+    id: 4
     mode: active
 mlag_configuration:
   domain_id: RACK2
