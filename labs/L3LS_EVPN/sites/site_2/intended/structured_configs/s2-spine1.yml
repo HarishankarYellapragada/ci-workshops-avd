@@ -3,6 +3,12 @@ aaa_authorization:
     default: local
 aaa_root:
   disabled: true
+banners:
+  motd: 'You shall not pass. Unless you are authorized. Then you shall pass.
+
+    EOF
+
+    '
 config_end: true
 daemon_terminattr:
   cvaddrs:
@@ -93,6 +99,15 @@ local_users:
   sha512_password: $6$arista$BKQq8kaXODorNRcLGrhhISrM6U127DG.78jAkxg9ItL.4Qv1IYwEjWiCo.HJQy1uI7et8oLeH5A9yjF00T.4X/
   ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXOwzPv4hBZGRccbRTOpTWsOjVNBoqHtpJNiJiODpoJUGnPwFazYseHCHeAinUo52EWOg5vMbBubmUH9GXdzNOtRTBzQjafBgcBSXQUc1lXZPOULNo88/SQckCwccuIIT/X/lNFydp+aykNUORv4mf057mW7YlPBxaylQcH1Vb34ZrE3NCPncsJ5EvvrBxl4OwZwpx8rFTqYQyv5jFyBae7M6KmyVxUvYELusIkjVB+9NrV14AQBdJVKyElG23wPR7YCutevIy9TvWELVjLmIvNLsQWOaPBNfRCcicsqYpEeFQswYboKW0IMyS1+6XNiBcZDH5RIt/Kzq5AWHCh8AF
     arista@index-exchange-train2-1-216bda19-eos
+logging:
+  vrfs:
+  - name: default
+    source_interface: Management0
+    hosts:
+    - name: 10.200.0.108
+      protocol: udp
+    - name: 10.200.1.108
+      protocol: udp
 loopback_interfaces:
 - name: Loopback0
   description: ROUTER_ID
